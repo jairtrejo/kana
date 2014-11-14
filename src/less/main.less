@@ -1,0 +1,34 @@
+@import "includes/bootstrap";
+
+@highlight: #CF0A2C;
+@background: #FFF;
+@links: #43A39F;
+
+.container{
+    width: 600px;
+    margin: 0 auto;
+    padding-top: 150px;
+}
+
+h1{
+    color: @highlight;
+    text-align: center;
+}
+
+a{
+    color: @links;
+}
+
+.description{
+    margin: 3em auto;
+}
+
+.button-holder{
+    text-align: center;
+}
+
+.cta{
+    .btn;
+    .btn-lg;
+    .button-variant(@background; @highlight; @highlight);
+}
