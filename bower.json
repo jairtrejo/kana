@@ -8,12 +8,15 @@
   "private": true,
   "dependencies": {
     "font-awesome": "~4.2.0",
-    "bootstrap": "~3.3.0"
+    "bootstrap": "~3.3.0",
+    "lodash": "~2.4.1",
+    "backbone": "~1.1.2"
   },
   "overrides": {
     "bootstrap": {
       "main": [
-        "dist/fonts/**", "dist/js/bootstrap.min.js"
+        "dist/fonts/**",
+        "dist/js/bootstrap.min.js"
       ]
     }
   }

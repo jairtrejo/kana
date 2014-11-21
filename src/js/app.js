@@ -1,3 +1,3 @@
-var msg = "Hello";
+var QuestionView = require('./views/question');
 
-console && console.log(msg);
+var App = new QuestionView();

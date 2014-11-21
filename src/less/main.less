@@ -1,34 +1,81 @@
 @import "includes/bootstrap";
+@import "includes/material";
 
-@highlight: #CF0A2C;
-@background: #FFF;
-@links: #43A39F;
+@accent-color: #FF4081;
+@background-color: #DADADA;
 
-.container{
-    width: 600px;
-    margin: 0 auto;
-    padding-top: 150px;
+body{
+    padding-top: 70px;
+    background-color: @background-color;
 }
 
-h1{
-    color: @highlight;
+@media(min-width:992px){
+    .container{
+        width: 400px;
+        margin: 0 auto;
+    }
+}
+
+.navbar-brand{
+    font-weight: bold;
+}
+
+.game{
+    .BoxShadowHelper(2);
+    background-color: #FFF;
+}
+
+.messages{
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    text-align: right;
+    padding: 0 10px;
+}
+
+.question{
+    font-size: 10em;
     text-align: center;
+    min-height: 250px;
+    text-transform: uppercase;
+    padding: 20px 0 50px 0;
 }
 
-a{
-    color: @links;
-}
-
-.description{
-    margin: 3em auto;
-}
-
-.button-holder{
-    text-align: center;
-}
-
-.cta{
+.answer{
     .btn;
-    .btn-lg;
-    .button-variant(@background; @highlight; @highlight);
+    .btn-link;
+    width: 14%;
+    margin: 0 5% 30px 4%;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: 1s position ease;
+}
+
+.answer[disabled]{
+    color: darken(@background-color, 10%);
+}
+
+.answer.correct{
+    color: #000;
+    font-weight: bold;
+}
+
+.fa-cog{
+    font-size: 20px;
+}
+
+.footer p{
+    text-align: center;
+    padding-top: 15px;
+}
+
+nav.navbar{
+    .BoxShadowHelper(2);
+}
+
+.navbar-right{
+    float: right;
+}
+.navbar-header{
+    float: left;
 }
