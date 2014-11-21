@@ -1,6 +1,8 @@
 var gulp           = require("gulp"),
     minifyHTML     = require("gulp-minify-html"),
     concat         = require("gulp-concat"),
+    transform      = require('vinyl-transform'),
+    browserify     = require("browserify"),
     uglify         = require("gulp-uglify"),
     cssmin         = require("gulp-cssmin"),
     sourcemaps     = require("gulp-sourcemaps"),
@@ -8,6 +10,7 @@ var gulp           = require("gulp"),
     inject         = require("gulp-inject"),
     less           = require("gulp-less"),
     filter         = require("gulp-filter"),
+    rename         = require("gulp-rename"),
     browserSync    = require("browser-sync");
 
 var config = {
@@ -18,7 +21,8 @@ var config = {
         },
         javascript: {
             src:  ["src/js/**/*.js"],
-            dest: "build/js"
+            dest: "build/js",
+            bundles: ["src/js/*.js"]
         },
         css: {
             src: ["src/css/**/*.css"],
@@ -48,11 +52,17 @@ gulp.task("html", function(){
         .pipe(gulp.dest(config.paths.html.dest));
 });
 
-gulp.task("scripts", function(){
-    return gulp.src(config.paths.javascript.src)
-        .pipe(sourcemaps.init())
-        .pipe(concat("app.min.js"))
+gulp.task("browserify", function(){
+    var browserified = transform(function(filename){
+        var b = browserify(filename, {debug: true});
+        return b.bundle();
+    });
+
+    return gulp.src(config.paths.javascript.bundles)
+        .pipe(browserified)
+        .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.paths.javascript.dest));
 });
@@ -84,7 +94,7 @@ gulp.task("less", function(){
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task("browser-sync", function() {
+gulp.task("browser-sync", function(){
     browserSync({
         server: {
             baseDir: "./build"
@@ -92,11 +102,11 @@ gulp.task("browser-sync", function() {
     });
 });
 
-gulp.task("build", ["bower", "html", "scripts", "css", "less"]);
+gulp.task("build", ["bower", "html", "browserify", "css", "less"]);
 
 gulp.task("default", ["build", "browser-sync"], function(){
     gulp.watch(config.paths.html.src, ["html", browserSync.reload]);
-    gulp.watch(config.paths.javascript.src, ["scripts", browserSync.reload]);
+    gulp.watch(config.paths.javascript.src, ["browserify", browserSync.reload]);
     gulp.watch(config.paths.bower.src, ["bower", browserSync.reload]);
 
     gulp.watch(config.paths.css.src, ["css"]);
