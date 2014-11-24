@@ -23,9 +23,11 @@ module.exports = Backbone.View.extend({
         var isCorrect = this.model.isCorrect(choice);
 
         if(isCorrect){
-            $('.answer').addClass('hidden');
+            $('.answer').addClass('invisible');
+
+            button.removeClass('invisible');
             button.addClass('correct');
-            button.removeClass('hidden');
+
             $('#correct').removeClass('hidden');
 
             window.setTimeout(function(){ that.model.nextQuestion(); }, 1000);
