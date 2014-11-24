@@ -27,7 +27,8 @@ module.exports = Backbone.View.extend({
             button.addClass('correct');
             button.removeClass('hidden');
             $('#correct').removeClass('hidden');
-            window.setTimeout(function(){ that.model = new Question(); that.render() }, 1000);
+
+            window.setTimeout(function(){ that.model.nextQuestion(); }, 1000);
         }
         else{
             button.prop('disabled', true);

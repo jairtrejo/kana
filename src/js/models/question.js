@@ -15,6 +15,9 @@ module.exports = Backbone.Model.extend({
         }
 
         return correct;
+    },
+    nextQuestion: function(){
+        this.set(getQuestion());
     }
 });
 
@@ -32,7 +35,6 @@ function getAvailable(rows){
 
 function updateScore(kana, correct){
     kana.score[correct ? 'correct' : 'incorrect'] += 1;
-    console && console.log(kana);
 }
 
 function getQuestion(){
