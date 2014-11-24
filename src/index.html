@@ -31,17 +31,15 @@
     <!-- bower:js -->
     <!-- endinject -->
     <script id="question-template" type="text/template">
-        <div class="game">
-            <div class="messages">
-                <i id="correct" class="fa fa-check hidden"></i>
-            </div>
-            <div class="question">
-                <%- question %>
-            </div>
-            <% _.each(choices, function(choice, i){%>
-                <button data-choice="<%- i %>" class="answer" type="button"><%- choice %></button>
-            <%});%>
+        <div class="messages">
+            <i id="correct" class="fa fa-check hidden"></i>
         </div>
+        <div class="question">
+            <%- question %>
+        </div>
+        <% _.each(choices, function(choice, i){%>
+            <button data-choice="<%- i %>" class="answer" type="button"><%- choice %></button>
+        <%});%>
     </script>
     <script type="text/javascript" src="js/app.min.js"></script>
 </body>

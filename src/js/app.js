@@ -1,3 +1,6 @@
 var QuestionView = require('./views/question');
 
-var App = new QuestionView();
+$(function(){
+    var question = new QuestionView();
+    $('#app').append(question.render().$el);
+});
