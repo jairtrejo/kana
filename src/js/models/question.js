@@ -1,5 +1,5 @@
 var kana = require('./kana'),
-    rows;
+    game;
 
 module.exports = Backbone.Model.extend({
     defaults: function(){
@@ -12,6 +12,7 @@ module.exports = Backbone.Model.extend({
 
         if(correct){
             unlockNextRow();
+            saveGame();
         }
 
         return correct;
@@ -25,7 +26,7 @@ function initRow(row){
     _.forEach(row, function(q){
         q.score = {correct: 0, incorrect: 0};
     });
-};
+}
 
 function getAvailable(rows){
     return _.filter(_.flatten(rows), function(kana){
@@ -38,7 +39,7 @@ function updateScore(kana, correct){
 }
 
 function getQuestion(){
-    var available = getAvailable(rows);
+    var available = getAvailable(game);
 
     var fields = Math.random() > 0.5 ? ['sound', 'kana'] : ['kana', 'sound'],
         questionField = fields[0], answerField = fields[1];
@@ -49,7 +50,7 @@ function getQuestion(){
         kana: questionKana,
         question:questionKana[questionField],
         answer: questionKana[answerField]
-    }
+    };
 
     var choices = _.chain(available)
                    .filter(function(kana){
@@ -65,14 +66,14 @@ function getQuestion(){
     question.choices = _.shuffle(choices);
 
     return question;
-};
+}
 
 function unlockNextRow(){
-    var nextToUnlock = _.find(rows, function(row){
+    var nextToUnlock = _.find(game, function(row){
         return !row[0].score;
     });
 
-    var allLearned = _.every(getAvailable(rows), function(kana){
+    var allLearned = _.every(getAvailable(game), function(kana){
             var attempts = kana.score.correct + kana.score.incorrect,
                 errorRatio = attempts > 0 ? kana.score.incorrect / attempts : 1;
             return errorRatio < 0.5;
@@ -83,9 +84,18 @@ function unlockNextRow(){
     }
 }
 
-function init(){
-    rows = kana.hiragana.concat(kana.katakana);
-    initRow(rows[0]);
+function saveGame(){
+    localStorage && localStorage.setItem("game", JSON.stringify(game));
 }
 
-init();
+function loadGame(){
+    return (localStorage && JSON.parse(localStorage.getItem("game"))) ||
+           kana.hiragana.concat(kana.katakana);
+}
+
+function newGame(){
+    game = loadGame();
+    initRow(game[0]);
+}
+
+newGame();
