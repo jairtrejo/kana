@@ -2,8 +2,8 @@ var kana = require('./kana'),
     game;
 
 module.exports = Backbone.Model.extend({
-    defaults: function(){
-        return getQuestion();
+    initialize: function(){
+        this.nextQuestion();
     },
     isCorrect: function(choice){
         var correct = this.get('choices')[choice] === this.get('answer');

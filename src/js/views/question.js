@@ -1,5 +1,3 @@
-var Question = require('../models/question');
-
 module.exports = Backbone.View.extend({
     tagName: "div",
     className: "game",
@@ -7,8 +5,8 @@ module.exports = Backbone.View.extend({
     events: {
         "click .answer": "tryAnswer"
     },
-    initialize: function(){
-        this.model = new Question();
+    initialize: function(model){
+        this.model = model;
         this.listenTo(this.model, 'change', this.render);
     },
     render: function(){
