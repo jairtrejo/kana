@@ -45,6 +45,8 @@ module.exports = Backbone.View.extend({
             window.setTimeout(function(){ that.model.nextQuestion(); }, 1000);
         }
         else{
+            this.$('.question').removeClass('wrong');
+            _.delay(function(){this.$('.question').addClass('wrong');}, 20);
             button.prop('disabled', true);
         }
     }

@@ -85,7 +85,10 @@ gulp.task("less", function(){
     return gulp.src(config.paths.less.src)
         .pipe(sourcemaps.init())
         .pipe(less({
-            paths: ["bower_components/bootstrap/less"]
+            paths: [
+                "bower_components/bootstrap/less",
+                "bower_components/less-prefixer"
+            ]
         }))
         .pipe(concat("main.min.css"))
         .pipe(sourcemaps.write())

@@ -4,7 +4,7 @@ var AppView = require('./views/app-view'),
 $(function(){
     if(window.navigator.standalone){
         $('nav').css('padding-top', '15px');
-        $('body').css('padding-top', '85px');
+        $('body').css('padding-top', '95px');
     }
     var appView = new AppView();
     var router = new AppRouter(appView);

@@ -10,7 +10,8 @@
     "font-awesome": "~4.2.0",
     "bootstrap": "~3.3.0",
     "lodash": "~2.4.1",
-    "backbone": "~1.1.2"
+    "backbone": "~1.1.2",
+    "less-prefixer": "*"
   },
   "overrides": {
     "bootstrap": {
@@ -18,6 +19,9 @@
         "dist/fonts/**",
         "dist/js/bootstrap.min.js"
       ]
+    },
+    "less-prefixer": {
+      "main": []
     }
   }
 }

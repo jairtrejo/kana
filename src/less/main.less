@@ -1,12 +1,14 @@
+@import "prefixer";
 @import "includes/bootstrap";
 @import "includes/material";
+@import "includes/animations";
 
 @accent-color: #FF4081;
 @background-color: #DADADA;
 
 body{
     padding-top: 70px;
-    background-color: @background-color;
+    background-color: #FFF;
 }
 
 @media(min-width:992px){
@@ -14,15 +16,19 @@ body{
         width: 400px;
         margin: 0 auto;
     }
+
+    .game{
+        .BoxShadowHelper(2);
+        background-color: #FFF;
+    }
+
+    body{
+        background-color: @background-color;
+    }
 }
 
 .navbar-brand{
     font-weight: bold;
-}
-
-.game{
-    .BoxShadowHelper(2);
-    background-color: #FFF;
 }
 
 .messages{
@@ -34,22 +40,38 @@ body{
 }
 
 .question{
-    font-size: 10em;
+    font-size: 9.5em;
     text-align: center;
-    min-height: 250px;
+    height: 250px;
     text-transform: uppercase;
     padding: 20px 0 50px 0;
 }
 
+.question.wrong{
+    .shake-target !important;
+}
+
 .answer{
-    .btn;
     .btn-link;
-    width: 14%;
-    margin: 0 5% 30px 4%;
+    .btn-block;
+    height: 50px;
+    margin-bottom: 40px;
+    cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 1.3em;
     &:hover, &:active, &:focus{
         text-decoration: none !important;
+        outline: none !important;
+    }
+}
+
+.is-visible{
+    .question{
+        .jelly-target;
+    }
+    .answer{
+        .bounce-up-target;
     }
 }
 

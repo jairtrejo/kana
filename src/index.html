@@ -37,9 +37,13 @@
         <div class="question">
             <%- question %>
         </div>
-        <% _.each(choices, function(choice, i){%>
-            <button data-choice="<%- i %>" class="answer" type="button"><%- choice %></button>
-        <%});%>
+        <div class="row">
+            <% _.each(choices, function(choice, i){%>
+                <div class="col-xs-3" style="text-align: center">
+                    <button data-choice="<%- i %>" class="btn answer" type="button" style="-webkit-animation-delay: <%- 50 + i * 50 %>ms; animation-delay: <%- 50 + i * 50 %>ms"><%- choice %></button>
+                </div>
+            <%});%>
+        </div>
     </script>
     <script type="text/javascript" src="js/app.min.js"></script>
 </body>
