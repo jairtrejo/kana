@@ -13,6 +13,20 @@ module.exports = Backbone.View.extend({
         this.$el.html(this.template(this.model.toJSON()));
         return this;
     },
+    transitionIn: function(callback){
+        var view = this;
+
+        var animateIn = function(){
+            view.$el.addClass('is-visible');
+            view.$el.one('transitioned', function(){
+                if(_.isFunction(callback)){
+                    callback();
+                }
+            });
+        }
+
+        _.delay(animateIn, 20);
+    },
     tryAnswer: function(event){
         var that = this;
         var button = $(event.toElement);
