@@ -1,5 +1,6 @@
 var Question = require('../models/question'),
-    QuestionView = require('../views/question');
+    QuestionView = require('../views/question'),
+    SettingsView = require('../views/settings-view');
 
 module.exports = Backbone.Router.extend({
     routes: {

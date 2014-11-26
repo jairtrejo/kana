@@ -17,7 +17,7 @@
                 <span class="navbar-brand">Kana</span>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="fa fa-cog"></i></a></li>
+                <li><a href="#settings"><i class="fa fa-cog"></i></a></li>
             </ul>
         </div>
     </nav>
@@ -43,6 +43,24 @@
                     <button data-choice="<%- i %>" class="btn answer" type="button" style="-webkit-animation-delay: <%- 50 + i * 50 %>ms; animation-delay: <%- 50 + i * 50 %>ms"><%- choice %></button>
                 </div>
             <%});%>
+        </div>
+    </script>
+    <script id="settings-template" type="text/template">
+        <h2>Manage questions</h2>
+        <div class="kana-table scrollable">
+            <% for(i=0; i<50; ++i){%>
+            <div class="kana-row row">
+                <div class="col-xs-3 col-sm-2 learning-status-column">
+                    <button type="button" class="learning-status">
+                        <i class="fa <%- ['fa-check-circle', 'fa-times-circle', 'fa-minus-circle'][Math.min(i, 2)] %>"></i>
+                    </button>
+                </div>
+                <div class="col-xs-9 col-sm-10">
+                    <p class="kana">あいうえお</p>
+                    <p class="explanation"><%- ['Learning', 'Never ask', 'Yet to learn'][Math.min(i, 2)] %></p>
+                </div>
+            </div>
+            <%}%>
         </div>
     </script>
     <script type="text/javascript" src="js/app.min.js"></script>

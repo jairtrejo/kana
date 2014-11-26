@@ -9,27 +9,37 @@
 body{
     padding-top: 70px;
     background-color: #FFF;
+    height: 100%;
+    overflow: hidden;
 }
 
-@media(min-width:992px){
-    .container{
-        width: 400px;
-        margin: 0 auto;
-    }
+nav.navbar{
+    .BoxShadowHelper(2);
+}
 
-    .game{
-        .BoxShadowHelper(2);
-        background-color: #FFF;
-    }
-
-    body{
-        background-color: @background-color;
-    }
+.navbar-right{
+    float: right;
+}
+.navbar-header{
+    float: left;
 }
 
 .navbar-brand{
     font-weight: bold;
 }
+
+.card(@level){
+    .BoxShadowHelper(@level);
+    background-color: #FFF;
+}
+
+.scrollable{
+    overflow-y: scroll;
+}
+
+/*
+ * Game
+ */
 
 .messages{
     height: 30px;
@@ -84,7 +94,7 @@ body{
     font-weight: bold;
 }
 
-.fa-cog{
+nav .fa{
     font-size: 20px;
 }
 
@@ -93,13 +103,100 @@ body{
     padding-top: 15px;
 }
 
-nav.navbar{
-    .BoxShadowHelper(2);
+/*
+ * Settings
+ */
+
+.settings{
+    .card(4);
+    position: absolute;
+    top: 70px;
+    margin-left: -15px;
+    width: 100%;
+    z-index: 1;
+
+    .come-down-target;
+
+    &.leave{
+        .go-up-target;
+    }
+
+    h2 {
+        background-color: darken(@background-color, 10%);
+        margin-top: 0;
+        padding: 20px 0 20px 15px;
+        text-align: left;
+        font-size: 16px;
+        font-weight: bold;
+        color: #FFF;
+    }
+
+    .kana-row{
+        margin: 16px 0;
+    }
+
+    .kana-table{
+        max-height: 500px;
+    }
+
+    .learning-status-column{
+        text-align: center;
+    }
+
+    .learning-status{
+        .btn-link;
+        .btn-block;
+        padding: 0;
+        font-size: 32px;
+    }
+
+    .fa-check-circle{
+        color: #8BC34A;
+    }
+
+    .fa-minus-circle{
+        color: darken(@background-color, 10%);
+    }
+
+    .fa-times-circle{
+        color: #EF5350;
+    }
+
+    .kana{
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+
+    .explanation{
+        .text-muted;
+    }
 }
 
-.navbar-right{
-    float: right;
-}
-.navbar-header{
-    float: left;
+
+/*
+ * Media queries
+ */
+
+@media(min-width:992px){
+    .container{
+        width: 400px;
+        margin: 0 auto;
+    }
+
+    .game{
+        .card(2);
+    }
+
+    .settings{
+        top: 60px;
+        width: 400px;
+
+        .learning-status{
+            font-size: 28px;
+        }
+    }
+
+    body{
+        background-color: @background-color;
+    }
 }

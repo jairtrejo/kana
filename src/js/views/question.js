@@ -17,15 +17,18 @@ module.exports = Backbone.View.extend({
         var view = this;
 
         var animateIn = function(){
-            view.$el.addClass('is-visible');
-            view.$el.one('transitioned', function(){
+            view.$el.one('webkitAnimationEnd oanimationend oAnimationEnd msAnimationEnd animationend', function(){
                 if(_.isFunction(callback)){
                     callback();
                 }
             });
+            view.$el.addClass('is-visible');
         }
 
         _.delay(animateIn, 20);
+    },
+    transitionOut: function(callback){
+        callback();
     },
     tryAnswer: function(event){
         var that = this;
