@@ -27,7 +27,6 @@ module.exports = Backbone.View.extend({
         view.$el.removeClass('is-visible');
 
         view.$el.one('webkitAnimationEnd oanimationend oAnimationEnd msAnimationEnd animationend', function () {
-            console && console.log('Animation ended');
             if (_.isFunction(callback)) {
                 callback();
             }

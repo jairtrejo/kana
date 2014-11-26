@@ -6,8 +6,7 @@ module.exports = Backbone.View.extend({
         "touchstart .answer": "tryAnswer",
         "click .answer": "tryAnswer"
     },
-    initialize: function(model){
-        this.model = model;
+    initialize: function(){
         this.listenTo(this.model, 'change', this.render);
     },
     render: function(){

@@ -7,16 +7,17 @@ module.exports = Backbone.Router.extend({
         'settings': 'settings',
         '': 'home'
     },
-    initialize: function(appView){
-        this.appView = appView;
+    initialize: function(options){
+        this.game = options.game;
+        this.appView = options.appView;
     },
     settings: function(){
         var settingsView = new SettingsView();
         this.appView.goTo(settingsView);
     },
     home: function(){
-        var question = new Question();
-        var questionView = new QuestionView(question);
+        var question = new Question(this.game.getQuestion(), {game: this.game});
+        var questionView = new QuestionView({model: question});
         this.appView.goTo(questionView);
     }
 });

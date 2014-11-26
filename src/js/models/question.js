@@ -1,9 +1,6 @@
-var Game = require('./game');
-
 module.exports = Backbone.Model.extend({
-    initialize: function(){
-        this.game = new Game();
-        this.nextQuestion();
+    initialize: function(attributes, options){
+        this.game = options.game;
     },
     isCorrect: function(choice){
         var correct = this.get('choices')[choice] === this.get('answer');
