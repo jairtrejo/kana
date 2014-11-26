@@ -3,6 +3,7 @@ module.exports = Backbone.View.extend({
     className: "game",
     template: _.template($('#question-template').html()),
     events: {
+        "touchstart .answer": "tryAnswer",
         "click .answer": "tryAnswer"
     },
     initialize: function(model){
@@ -32,7 +33,7 @@ module.exports = Backbone.View.extend({
     },
     tryAnswer: function(event){
         var that = this;
-        var button = $(event.toElement);
+        var button = $(event.target);
         var choice = parseInt(button.data('choice'));
 
         var isCorrect = this.model.isCorrect(choice);
@@ -52,5 +53,8 @@ module.exports = Backbone.View.extend({
             _.delay(function(){this.$('.question').addClass('wrong');}, 20);
             button.prop('disabled', true);
         }
+
+        event.preventDefault();
+        event.stopPropagation();
     }
 });
