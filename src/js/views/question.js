@@ -3,8 +3,7 @@ module.exports = Backbone.View.extend({
     className: "game",
     template: _.template($('#question-template').html()),
     events: {
-        "touchstart .answer": "tryAnswer",
-        "click .answer": "tryAnswer"
+        "click .answer": "tryAnswer",
     },
     initialize: function(){
         this.listenTo(this.model, 'change', this.render);
