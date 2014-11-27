@@ -28,8 +28,9 @@
             <p>By <a href="http://jairtrejo.mx">Jair Trejo</a></p>
         </div>
     </div>
-    <!-- bower:js -->
-    <!-- endinject -->
+
+    <!-- Question mode -->
+
     <script id="question-template" type="text/template">
         <div class="messages">
             <i id="correct" class="fa fa-check hidden"></i>
@@ -45,24 +46,33 @@
             <%});%>
         </div>
     </script>
+
+    <!-- Settings screen -->
+
     <script id="settings-template" type="text/template">
         <h2>Manage questions</h2>
-        <div class="kana-table scrollable">
-            <% for(i=0; i<50; ++i){%>
-            <div class="kana-row row">
-                <div class="col-xs-3 col-sm-2 learning-status-column">
-                    <button type="button" class="learning-status">
-                        <i class="fa <%- ['fa-check-circle', 'fa-times-circle', 'fa-minus-circle'][Math.min(i, 2)] %>"></i>
-                    </button>
-                </div>
-                <div class="col-xs-9 col-sm-10">
-                    <p class="kana">あいうえお</p>
-                    <p class="explanation"><%- ['Learning', 'Never ask', 'Yet to learn'][Math.min(i, 2)] %></p>
-                </div>
+        <div class="kana-table scrollable"></div>
+    </script>
+
+    <!-- Individual kana row in settings -->
+
+    <script id="kana-row-template" type="text/template">
+        <div class="kana-row row">
+            <div class="col-xs-2 col-sm-2 learning-status-column">
+                <span class="learning-status">
+                    <i class="fa <%- {unlocked: 'fa-check-circle', locked: 'fa-times-circle', pristine: 'fa-minus-circle' }[status] %>"></i>
+                </span>
             </div>
-            <%}%>
+            <div class="col-xs-10 col-sm-10">
+                <p class="kana"><%- text %></p>
+                <p class="explanation"><%- { unlocked: 'Learning', locked: 'Never ask', pristine: 'Yet to learn' }[status] %></p>
+            </div>
         </div>
     </script>
+
+    <!-- bower:js -->
+    <!-- endinject -->
+
     <script type="text/javascript" src="js/app.min.js"></script>
 </body>
 </html>

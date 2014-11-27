@@ -1,10 +1,20 @@
+var KanaRowView = require('../views/kana-row-view');
+
 module.exports = Backbone.View.extend({
     tagName: 'div',
     className: 'settings',
     template: _.template($('#settings-template').html()),
     isDialog: true,
     render: function(){
+        var view = this;
+
         this.$el.html(this.template());
+
+        this.model.each(function(kanaRow){
+            var krview = new KanaRowView({model: kanaRow});
+            view.$('.kana-table').append(krview.render().$el);
+        });
+
         return this;
     },
     transitionIn: function(callback){

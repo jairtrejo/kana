@@ -10,6 +10,11 @@ function Game(){
 Game.prototype.getQuestion = function(){
     var available = getAvailable(this.game);
 
+    if(available.length === 0){
+        this.unlockNextRow();
+        available = getAvailable(this.game);
+    }
+
     var fields = Math.random() > 0.5 ? ['sound', 'kana'] : ['kana', 'sound'],
         questionField = fields[0], answerField = fields[1];
 
@@ -43,7 +48,7 @@ Game.prototype.updateScore = function(kana, correct){
 
 Game.prototype.unlockNextRow = function(){
     var nextToUnlock = _.find(this.game, function(row){
-        return !row[0].score;
+        return !row[0].score && !row[0].locked;
     });
 
     var allLearned = _.every(getAvailable(this.game), function(kana){
@@ -89,7 +94,7 @@ function pickQuestion(options){
 
 function getAvailable(rows){
     return _.filter(_.flatten(rows), function(kana){
-        return kana.score;
+        return kana.score && !kana.locked;
     });
 }
 
