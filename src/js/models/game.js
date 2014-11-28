@@ -1,4 +1,4 @@
-var KanaList = require('./kana');
+var fs = require('fs');
 
 module.exports = Game;
 
@@ -22,7 +22,7 @@ Game.prototype.getQuestion = function(){
 
     question = {
         kana: questionKana,
-        question:questionKana[questionField],
+        question: questionKana[questionField],
         answer: questionKana[answerField]
     };
 
@@ -63,8 +63,11 @@ Game.prototype.unlockNextRow = function(){
 };
 
 function loadGame(){
+    var kana = JSON.parse(
+        fs.readFileSync(__dirname + '/kana.json')
+    );
     return (localStorage && JSON.parse(localStorage.getItem("game"))) ||
-           KanaList.hiragana.concat(KanaList.katakana);
+           kana.hiragana.concat(kana.katakana);
 }
 
 function initRow(row){

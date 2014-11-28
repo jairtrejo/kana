@@ -55,7 +55,10 @@ gulp.task("html", function(){
 
 gulp.task("browserify", function(){
     var browserified = transform(function(filename){
-        var b = browserify(filename, {debug: true});
+        var b = browserify(filename, {
+            debug: true,
+            transform: ['brfs']
+        });
         return b.bundle();
     });
 
