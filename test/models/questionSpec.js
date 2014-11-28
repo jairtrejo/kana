@@ -20,44 +20,31 @@ describe('Question', function(){
         expect(q.game).toEqual(game);
         expect(q.get('game')).toBeUndefined();
     });
-});
 
-describe('Question.isCorrect', function(){
-    var game;
+    describe('Question.isCorrect', function(){
+        it('should return true for the right answer only', function(){
+            var i;
+            var q = new Question(game.getQuestion(), {game: game});
+            var correct = q.get('choices').indexOf(q.get('answer'));
 
-    beforeEach(function(){
-        window.localStorage.clear();
-        game = new Game();
+            for(i=0; i < q.get('choices').length; ++i){
+                expect(q.isCorrect(i)).toBe(i == correct);
+            }
+        });
     });
 
-    it('should return true for the right answer only', function(){
-        var i;
-        var q = new Question(game.getQuestion(), {game: game});
-        var correct = q.get('choices').indexOf(q.get('answer'));
+    describe('Question.nextQuestion', function(){
+        it('sets the game\'s next question as model attributes', function(){
+            var gq = game.getQuestion();
+            var q = new Question(game.getQuestion(), {game: game});
 
-        for(i=0; i < q.get('choices').length; ++i){
-            expect(q.isCorrect(i)).toBe(i == correct);
-        }
-    });
-});
+            spyOn(game, 'getQuestion').and.returnValue(gq);
+            q.nextQuestion();
 
-describe('Question.nextQuestion', function(){
-    var game;
-
-    beforeEach(function(){
-        window.localStorage.clear();
-        game = new Game();
-    });
-
-    it('sets the game\'s next question as model attributes', function(){
-        var gq = game.getQuestion();
-        var q = new Question(game.getQuestion(), {game: game});
-
-        spyOn(game, 'getQuestion').and.returnValue(gq);
-        q.nextQuestion();
-
-        expect(game.getQuestion).toHaveBeenCalled();
-        expect(q.get('question')).toEqual(gq.question);
-        expect(q.get('answer')).toEqual(gq.answer);
+            expect(game.getQuestion).toHaveBeenCalled();
+            expect(q.get('question')).toEqual(gq.question);
+            expect(q.get('answer')).toEqual(gq.answer);
+        });
     });
 });
+
