@@ -11,7 +11,8 @@ var gulp           = require("gulp"),
     less           = require("gulp-less"),
     filter         = require("gulp-filter"),
     rename         = require("gulp-rename"),
-    browserSync    = require("browser-sync");
+    browserSync    = require("browser-sync"),
+    karma          = require("karma");
 
 var config = {
     paths: {
@@ -106,6 +107,12 @@ gulp.task("browser-sync", function(){
 });
 
 gulp.task("build", ["bower", "html", "browserify", "css", "less"]);
+
+gulp.task("test", function(){
+    karma.server.start({
+        configFile: __dirname + '/karma.conf.js'
+    });
+});
 
 gulp.task("default", ["build", "browser-sync"], function(){
     gulp.watch(config.paths.html.src, ["html", browserSync.reload]);
