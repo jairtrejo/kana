@@ -1,5 +1,5 @@
-var KanaRowView = require('../views/kana-row-view'),
-    fs = require('fs');
+var KanaRowView = require('../views/kana-row-view');
+var fs = require('fs');
 
 module.exports = Backbone.View.extend({
     tagName: 'div',
