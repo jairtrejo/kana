@@ -27,7 +27,7 @@ module.exports = Backbone.Router.extend({
         this.appView.goTo(settingsView);
     },
     home: function(){
-        this.questionView.model.nextQuestion();
+        this.questionView.nextQuestion();
         this.appView.goTo(this.questionView);
     }
 });

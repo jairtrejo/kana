@@ -60,7 +60,7 @@ module.exports = Backbone.View.extend({
         event.stopPropagation();
     },
 
-    getQuestion: function(){
+    nextQuestion: function(){
         this.model.nextQuestion();
     }
 });
