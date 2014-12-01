@@ -1,10 +1,13 @@
-var KanaRowView = require('../views/kana-row-view');
+var KanaRowView = require('../views/kana-row-view'),
+    fs = require('fs');
 
 module.exports = Backbone.View.extend({
     tagName: 'div',
     className: 'settings',
-    template: _.template($('#settings-template').html()),
     isDialog: true,
+
+    template: _.template(fs.readFileSync(__dirname + '/../../templates/settings.html', 'utf8')),
+
     render: function(){
         var view = this;
 

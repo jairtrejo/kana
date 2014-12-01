@@ -1,0 +1,11 @@
+<div class="kana-row row">
+    <div class="col-xs-2 col-sm-2 learning-status-column">
+        <span class="learning-status">
+            <i class="fa <%- {unlocked: 'fa-check-circle', locked: 'fa-times-circle', pristine: 'fa-minus-circle' }[status] %>"></i>
+        </span>
+    </div>
+    <div class="col-xs-10 col-sm-10">
+        <p class="kana"><%- text %></p>
+        <p class="explanation"><%- { unlocked: 'Learning', locked: 'Never ask', pristine: 'Yet to learn' }[status] %></p>
+    </div>
+</div>

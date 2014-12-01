@@ -1,10 +1,14 @@
+var fs = require('fs');
+
 module.exports = Backbone.View.extend({
     tagName: "div",
     className: "game",
-    template: _.template($('#question-template').html()),
     events: {
         "click .answer": "tryAnswer",
     },
+
+    template: _.template(fs.readFileSync(__dirname + '/../../templates/question.html', 'utf8')),
+
     initialize: function(){
         this.listenTo(this.model, 'change', this.render);
     },
@@ -54,5 +58,9 @@ module.exports = Backbone.View.extend({
 
         event.preventDefault();
         event.stopPropagation();
+    },
+
+    getQuestion: function(){
+        this.model.nextQuestion();
     }
 });

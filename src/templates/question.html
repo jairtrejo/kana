@@ -1,0 +1,15 @@
+<div class="messages">
+    <i id="correct" class="fa fa-check hidden"></i>
+</div>
+<div class="question">
+    <%- question %>
+</div>
+<div class="answers">
+    <div class="row">
+        <% _.each(choices, function(choice, i){ %>
+            <div class="col-xs-3" style="text-align: center">
+                <button data-choice="<%- i %>" class="btn answer" type="button" style="-webkit-animation-delay: <%- 50 + i * 50 %>ms; animation-delay: <%- 50 + i * 50 %>ms"><%- choice %></button>
+            </div>
+        <% }); %>
+    </div>
+</div>

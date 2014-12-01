@@ -1,14 +1,16 @@
+var fs = require('fs');
+
 module.exports = Backbone.View.extend({
 
     tagName: "div",
 
     className: "kana-row row",
 
-    template: _.template($('#kana-row-template').html()),
-
     events: {
         "click .kana-row": "toggleStatus",
     },
+
+    template: _.template(fs.readFileSync(__dirname + '/../../templates/kana-row.html', 'utf8')),
 
     initialize: function(){
         this.listenTo(this.model, 'change', this.render);

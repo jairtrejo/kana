@@ -29,49 +29,6 @@
         </div>
     </div>
 
-    <!-- Question mode -->
-
-    <script id="question-template" type="text/template">
-        <div class="messages">
-            <i id="correct" class="fa fa-check hidden"></i>
-        </div>
-        <div class="question">
-            <%- question %>
-        </div>
-        <div class="answers">
-            <div class="row">
-                <% _.each(choices, function(choice, i){ %>
-                    <div class="col-xs-3" style="text-align: center">
-                        <button data-choice="<%- i %>" class="btn answer" type="button" style="-webkit-animation-delay: <%- 50 + i * 50 %>ms; animation-delay: <%- 50 + i * 50 %>ms"><%- choice %></button>
-                    </div>
-                <% }); %>
-            </div>
-        </div>
-    </script>
-
-    <!-- Settings screen -->
-
-    <script id="settings-template" type="text/template">
-        <h2>Manage questions</h2>
-        <div class="kana-table scrollable"></div>
-    </script>
-
-    <!-- Individual kana row in settings -->
-
-    <script id="kana-row-template" type="text/template">
-        <div class="kana-row row">
-            <div class="col-xs-2 col-sm-2 learning-status-column">
-                <span class="learning-status">
-                    <i class="fa <%- {unlocked: 'fa-check-circle', locked: 'fa-times-circle', pristine: 'fa-minus-circle' }[status] %>"></i>
-                </span>
-            </div>
-            <div class="col-xs-10 col-sm-10">
-                <p class="kana"><%- text %></p>
-                <p class="explanation"><%- { unlocked: 'Learning', locked: 'Never ask', pristine: 'Yet to learn' }[status] %></p>
-            </div>
-        </div>
-    </script>
-
     <!-- bower:js -->
     <!-- endinject -->
 

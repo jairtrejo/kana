@@ -64,7 +64,7 @@ Game.prototype.unlockNextRow = function(){
 
 function loadGame(){
     var kana = JSON.parse(
-        fs.readFileSync(__dirname + '/kana.json')
+        fs.readFileSync(__dirname + '/kana.json', 'utf8')
     );
     return (localStorage && JSON.parse(localStorage.getItem("game"))) ||
            kana.hiragana.concat(kana.katakana);
