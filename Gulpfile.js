@@ -23,7 +23,7 @@ var config = {
         javascript: {
             src:  ["src/js/**/*.js"],
             dest: "build/js",
-            bundles: ["src/js/*.js"]
+            bundles: ["src/js/app.js"]
         },
         css: {
             src: ["src/css/**/*.css"],
