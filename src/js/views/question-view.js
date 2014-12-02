@@ -45,7 +45,7 @@ module.exports = Backbone.View.extend({
         callback();
     },
     tryAnswer: function(event){
-        var that = this;
+        var view = this;
         var button = $(event.target);
         var choice = parseInt(button.data('choice'));
 
@@ -59,7 +59,7 @@ module.exports = Backbone.View.extend({
 
             $('#correct').removeClass('hidden');
 
-            window.setTimeout(function(){ that.model.nextQuestion(); }, 1000);
+            window.setTimeout(function(){ view.nextQuestion(); }, 1000);
         }
         else{
             this.$('.question').removeClass('wrong');
