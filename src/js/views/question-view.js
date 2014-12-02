@@ -58,7 +58,7 @@ module.exports = Backbone.View.extend({
 
             $('#correct').removeClass('hidden');
 
-            window.setTimeout(function(){ view.nextQuestion(); }, 1000);
+            _.delay(function(){ view.nextQuestion(); }, 1000);
         }
         else{
             this.$('.question').removeClass('wrong');
