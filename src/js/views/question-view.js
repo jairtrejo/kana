@@ -1,5 +1,8 @@
 var fs = require('fs');
 
+require('browsernizr/test/css/animations');
+var Modernizr = require('browsernizr');
+
 module.exports = Backbone.View.extend({
     tagName: "div",
     className: "game",
@@ -20,11 +23,19 @@ module.exports = Backbone.View.extend({
         var view = this;
 
         var animateIn = function(){
-            view.$el.one('webkitAnimationEnd oanimationend oAnimationEnd msAnimationEnd animationend', function(){
+            function success(){
                 if(_.isFunction(callback)){
                     callback();
                 }
-            });
+            }
+
+            if(Modernizr.cssanimations){
+                view.$el.one('webkitAnimationEnd animationend', success);
+            }
+            else{
+                _.delay(success, 1000);
+            }
+
             view.$el.addClass('is-visible');
         }
 
