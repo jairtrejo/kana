@@ -1,5 +1,25 @@
+var fs = require('fs');
+
 module.exports = Backbone.View.extend({
-    el: '#app',
+    tagName: 'div',
+
+    template: _.template(
+        fs.readFileSync(__dirname + '/../../templates/app.html', 'utf8')
+    ),
+
+    initialize: function(){
+        this.render();
+        this.$container = this.$('.screen');
+        this.$statusBarIcon = this.$('.status-bar-icon');
+    },
+
+    render: function(){
+        this.$el.html(this.template());
+        if(window.navigator.standalone){
+            this.$('nav').css('padding-top', '15px');
+        }
+    },
+
     goTo: function(view){
         var previous = this.currentPage || null;
         var next = view;
@@ -13,7 +33,7 @@ module.exports = Backbone.View.extend({
         }
 
         if(!previous || !previous.isDialog){
-            this.$el.prepend(next.render().$el);
+            this.$container.prepend(next.render().$el);
         }
 
         var me = this;
@@ -23,20 +43,13 @@ module.exports = Backbone.View.extend({
         this.currentPage = next;
     },
     toggleIcon: function(isDialog){
-        var $icon;
         if(isDialog){
-            $icon = $('.fa-cog');
-            $icon.removeClass('fa-cog')
-                 .addClass('fa-times')
-                 .parent()
-                 .attr('href', '#');
+            this.$statusBarIcon.attr('href', '#')
+            this.$statusBarIcon.html('<i class="fa fa-times"></i>');
         }
         else{
-            $icon = $('.fa-times');
-            $icon.removeClass('fa-times')
-                 .addClass('fa-cog')
-                 .parent()
-                 .attr('href', '#settings');
+            this.$statusBarIcon.attr('href', '#settings')
+            this.$statusBarIcon.html('<i class="fa fa-cog"></i>');
         }
     }
 });

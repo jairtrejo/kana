@@ -3,11 +3,8 @@ var AppView = require('./views/app-view'),
     Game = require('./models/game');
 
 $(function(){
-    if(window.navigator.standalone){
-        $('nav').css('padding-top', '15px');
-        $('body').css('padding-top', '95px');
-    }
-    var router = new AppRouter({ appView: new AppView(), game: new Game() });
-
+    var appView = new AppView();
+    $('body').prepend(appView.$el);
+    var router = new AppRouter({ appView: appView, game: new Game() });
     Backbone.history.start();
 });
