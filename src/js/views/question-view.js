@@ -67,9 +67,6 @@ module.exports = Backbone.View.extend({
 
             button.prop('disabled', true);
         }
-
-        event.preventDefault();
-        event.stopPropagation();
     },
 
     nextQuestion: function(){
