@@ -5,7 +5,7 @@
         </span>
     </div>
     <div class="col-xs-10 col-sm-10">
-        <p class="kana"><%- text %></p>
+        <p class="kana"><%- _.pluck(row, 'kana').join(' ') %></p>
         <p class="explanation"><%- { unlocked: 'Learning', locked: 'Never ask', pristine: 'Yet to learn' }[status] %></p>
     </div>
 </div>

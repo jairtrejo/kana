@@ -20,7 +20,6 @@ module.exports = Backbone.View.extend({
         var attrs = this.model.toJSON();
 
         attrs.status = this.model.getStatus();
-        attrs.text = _.pluck(attrs.row, 'kana').join(' ');
 
         this.$el.html(this.template(attrs));
 
