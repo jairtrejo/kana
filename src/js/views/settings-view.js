@@ -1,5 +1,7 @@
 var KanaRowView = require('../views/kana-row-view');
 var fs = require('fs');
+require('browsernizr/test/css/animations');
+var Modernizr = require('browsernizr');
 
 module.exports = Backbone.View.extend({
     tagName: 'div',
@@ -20,30 +22,51 @@ module.exports = Backbone.View.extend({
 
         return this;
     },
+
     transitionIn: function(callback){
         var view = this;
 
-        var animateIn = function(callback){
-            view.$el.addClass('is-visible');
-            view.$el.one('webkitAnimationEnd oanimationend oAnimationEnd msAnimationEnd animationend', function(){
+        var animateIn = function(){
+            function success(){
                 if(_.isFunction(callback)){
                     callback();
                 }
-            });
+            }
+
+            if(Modernizr.cssanimations){
+                view.$el.one('webkitAnimationEnd animationend', success);
+            }
+            else{
+                _.delay(success, 1000);
+            }
+
+            view.$el.addClass('is-visible');
         }
 
         _.delay(animateIn, 20);
     },
+
     transitionOut: function(callback){
         var view = this;
 
-        view.$el.removeClass('is-visible');
-
-        view.$el.one('webkitAnimationEnd oanimationend oAnimationEnd msAnimationEnd animationend', function () {
-            if (_.isFunction(callback)) {
-                callback();
+        var animateIn = function(){
+            function success(){
+                if(_.isFunction(callback)){
+                    callback();
+                }
             }
-        });
+
+            if(Modernizr.cssanimations){
+                view.$el.one('webkitAnimationEnd animationend', success);
+            }
+            else{
+                _.delay(success, 1000);
+            }
+
+            view.$el.removeClass('is-visible');
+        }
+
+        _.delay(animateIn, 20);
 
         view.$el.addClass('leave');
     }

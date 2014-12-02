@@ -1,5 +1,4 @@
 var fs = require('fs');
-
 require('browsernizr/test/css/animations');
 var Modernizr = require('browsernizr');
 
