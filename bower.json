@@ -1,7 +1,7 @@
 {
   "name": "kana",
   "version": "1.0.0-alpha",
-  "description": "A simple tool for learning japanese kana.",
+  "description": "A simple tool for learning the japanese syllabaries.",
   "authors": [
     "Jair Trejo <jair@jairtrejo.mx>"
   ],
