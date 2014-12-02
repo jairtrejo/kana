@@ -1,4 +1,4 @@
 Kana
 ====
 
-A simple game for learning japanese kana.
+A simple tool for learning japanese kana.

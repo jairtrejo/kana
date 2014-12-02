@@ -1,6 +1,7 @@
 {
   "name": "kana",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha",
+  "description": "A simple tool for learning japanese kana.",
   "authors": [
     "Jair Trejo <jair@jairtrejo.mx>"
   ],

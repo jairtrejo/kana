@@ -1,11 +1,8 @@
 {
   "name": "kana",
-  "version": "1.0.0",
-  "description": "A simple game for learning japanese kana.",
+  "version": "1.0.0-alpha",
+  "description": "A simple tool for learning japanese kana.",
   "main": "index.html",
-  "scripts": {
-    "build": "gulp build"
-  },
   "author": "Jair Trejo <jair@jairtrejo.mx>",
   "license": "MIT",
   "devDependencies": {
