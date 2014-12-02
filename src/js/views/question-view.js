@@ -52,7 +52,7 @@ module.exports = Backbone.View.extend({
         var isCorrect = this.model.isCorrect(choice);
 
         if(isCorrect){
-            $('.answer').addClass('invisible');
+            this.$('.answer').addClass('invisible');
 
             button.removeClass('invisible');
             button.addClass('correct');
@@ -63,7 +63,8 @@ module.exports = Backbone.View.extend({
         }
         else{
             this.$('.question').removeClass('wrong');
-            _.delay(function(){this.$('.question').addClass('wrong');}, 20);
+            _.delay(function(){ view.$('.question').addClass('wrong'); }, 20);
+
             button.prop('disabled', true);
         }
 
