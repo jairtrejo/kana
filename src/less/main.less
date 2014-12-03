@@ -41,14 +41,6 @@ nav.navbar{
  * Game
  */
 
-.messages{
-    height: 30px;
-    line-height: 30px;
-    font-size: 20px;
-    text-align: right;
-    padding: 0 10px;
-}
-
 .question{
     font-size: 9.5em;
     text-align: center;
@@ -87,9 +79,15 @@ nav.navbar{
     color: darken(@background-color, 10%);
 }
 
-.answer.correct{
+
+.correct .answer{
     color: #000;
     font-weight: bold;
+    .smack-target;
+}
+
+.correct .question{
+    .smack-target;
 }
 
 nav .fa{

@@ -99,7 +99,7 @@ describe('QuestionView', function(){
             jasmine.clock().uninstall();
         });
 
-        describe('when correct button is pressed', function(){
+        describe('when the right button is pressed', function(){
             var correct;
 
             beforeEach(function(){
@@ -107,11 +107,10 @@ describe('QuestionView', function(){
                 question.get('choices')[0] = correct;
             });
 
-            it('sets appropiate classes on the correct button', function(){
+            it('leaves the correct button visible', function(){
                 questionView.tryAnswer({target: $button.get(0)});
 
                 expect($button).not.toHaveClass('invisible');
-                expect($button).toHaveClass('correct');
             });
 
             it('sets appropiate classes on the incorrect buttons', function(){
@@ -124,14 +123,27 @@ describe('QuestionView', function(){
                 });
             });
 
+            it('sets and unsets correct class on the parent element', function(){
+                questionView.tryAnswer({target: $button.get(0)});
+                jasmine.clock().tick(20);
+
+                expect(questionView.$el).toHaveClass('correct');
+
+                jasmine.clock().tick(1000);
+
+                expect(questionView.$el).not.toHaveClass('correct');
+            });
+
             it('resets the question after a second', function(){
-                spyOn(questionView, 'nextQuestion');
+                spyOn(questionView, 'nextQuestion').and.callThrough();
+                spyOn(questionView, 'transitionIn');
 
                 questionView.tryAnswer({target: $button.get(0)});
 
                 jasmine.clock().tick(1000);
 
                 expect(questionView.nextQuestion).toHaveBeenCalled();
+                expect(questionView.transitionIn).toHaveBeenCalled();
             });
         });
 

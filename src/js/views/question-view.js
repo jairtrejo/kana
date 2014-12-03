@@ -54,11 +54,13 @@ module.exports = Backbone.View.extend({
             this.$('.answer').addClass('invisible');
 
             button.removeClass('invisible');
-            button.addClass('correct');
 
-            $('#correct').removeClass('hidden');
+            this.$el.addClass('correct');
 
-            _.delay(function(){ view.nextQuestion(); }, 1000);
+            _.delay(function(){
+                view.nextQuestion();
+                view.$el.removeClass('correct');
+            }, 1000);
         }
         else{
             this.$('.question').removeClass('wrong');
