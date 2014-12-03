@@ -12,7 +12,8 @@
     "bootstrap": "~3.3.0",
     "lodash": "~2.4.1",
     "backbone": "~1.1.2",
-    "less-prefixer": "*"
+    "less-prefixer": "*",
+    "fastclick": "~1.0.3"
   },
   "overrides": {
     "bootstrap": {
