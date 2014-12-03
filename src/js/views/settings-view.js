@@ -28,6 +28,7 @@ module.exports = Backbone.View.extend({
 
         var animateIn = function(){
             function success(){
+                view.$el.removeClass('is-visible');
                 if(_.isFunction(callback)){
                     callback();
                 }
@@ -49,9 +50,10 @@ module.exports = Backbone.View.extend({
     transitionOut: function(callback){
         var view = this;
 
-        var animateIn = function(){
+        var animateOut = function(){
             function success(){
                 if(_.isFunction(callback)){
+                    view.$el.removeClass('leave');
                     callback();
                 }
             }
@@ -63,10 +65,9 @@ module.exports = Backbone.View.extend({
                 _.delay(success, 1000);
             }
 
-            view.$el.removeClass('is-visible');
         }
 
-        _.delay(animateIn, 20);
+        _.delay(animateOut, 20);
 
         view.$el.addClass('leave');
     }
