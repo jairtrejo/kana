@@ -40,13 +40,15 @@ describe('SettingsView', function(){
             var support = Modernizr.cssanimations;
             Modernizr.cssanimations = false;
 
-            settingsView.transitionIn(done);
+            settingsView.transitionIn(function(){
+                Modernizr.cssanimations = support;
+                done();
+            });
+
             jasmine.clock().tick(20);
 
             expect(settingsView.$el).toHaveClass('is-visible');
             jasmine.clock().tick(1001);
-
-            Modernizr.cssanimations = support;
         });
 
     });
@@ -74,15 +76,16 @@ describe('SettingsView', function(){
             var support = Modernizr.cssanimations;
             Modernizr.cssanimations = false;
 
-            settingsView.transitionOut(done);
+            settingsView.transitionOut(function(){
+                Modernizr.cssanimations = support;
+                done();
+            });
 
             // Delayed event setup
             jasmine.clock().tick(20);
 
             // Time out for browsers that don't support animations
             jasmine.clock().tick(1000);
-
-            Modernizr.cssanimations = support;
         });
     });
 });

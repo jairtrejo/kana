@@ -42,13 +42,14 @@ describe('QuestionView', function(){
             var support = Modernizr.cssanimations;
             Modernizr.cssanimations = false;
 
-            questionView.transitionIn(done);
+            questionView.transitionIn(function(){
+                Modernizr.cssanimations = support;
+                done();
+            });
             jasmine.clock().tick(20);
 
             expect(questionView.$el).toHaveClass('is-visible');
             jasmine.clock().tick(1001);
-
-            Modernizr.cssanimations = support;
         });
 
     });
@@ -76,15 +77,16 @@ describe('QuestionView', function(){
             var support = Modernizr.cssanimations;
             Modernizr.cssanimations = false;
 
-            questionView.transitionOut(done);
+            questionView.transitionOut(function(){
+                Modernizr.cssanimations = support;
+                done();
+            });
 
             // Delayed event setup
             jasmine.clock().tick(20);
 
             // Time out for browsers that don't support animations
             jasmine.clock().tick(1000);
-
-            Modernizr.cssanimations = support;
         });
     });
 
@@ -160,12 +162,12 @@ describe('QuestionView', function(){
                 expect($button).toBeDisabled();
             });
 
-            it('sets the appropiate class on the question', function(){
+            it('sets and unsets "wrong" class on the parent element', function(){
                 questionView.tryAnswer({target: $button.get(0)});
+                expect(questionView.$el).toHaveClass('wrong');
 
-                jasmine.clock().tick(25);
-
-                expect(questionView.$('.question')).toHaveClass('wrong');
+                questionView.$el.trigger('animationend');
+                expect(questionView.$el).not.toHaveClass('wrong');
             });
         });
 
