@@ -45,10 +45,6 @@ nav.navbar{
     font-size: 9.5em;
     text-align: center;
     text-transform: uppercase;
-
-    &.wrong{
-        .shake-target !important;
-    }
 }
 
 .answer{
@@ -80,6 +76,11 @@ nav.navbar{
     color: darken(@background-color, 10%);
 }
 
+.wrong{
+    .question{
+        .shake-target;
+    }
+}
 
 .correct .answer{
     color: #000;

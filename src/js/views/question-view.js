@@ -23,6 +23,7 @@ module.exports = Backbone.View.extend({
 
         var animateIn = function(){
             function success(){
+                view.$el.removeClass('is-visible');
                 if(_.isFunction(callback)){
                     callback();
                 }
@@ -63,14 +64,22 @@ module.exports = Backbone.View.extend({
             }, 1000);
         }
         else{
-            this.$('.question').removeClass('wrong');
-            _.delay(function(){ view.$('.question').addClass('wrong'); }, 20);
+            if(Modernizr.cssanimations){
+                view.$el.addClass('wrong');
+
+                view.$el.one('webkitAnimationEnd animationend',
+                    function(){
+                        view.$el.removeClass('wrong');
+                    }
+                );
+            }
 
             button.prop('disabled', true);
         }
     },
 
     nextQuestion: function(){
+        this.transitionIn();
         this.model.nextQuestion();
     }
 });
