@@ -1,27 +1,28 @@
 /*
- * Color scheme.
- * Based on "Through the sky" - colourlovers 603503
+ * Sakura strong - colourlovers 73612
  */
 
-@accent-color: darken(#A6D8F7, 20%);
+@accent-color: #EC4D68;
 
-@dark-background: #F6F9E5;
-@light-background: #FEFEFE;
+@dark-background: #7C7171;
+@light-background: #FEF9FD;
 
 @regular-text-color: #464040;
-@inverse-text-color: #FCF9E5;
+@inverse-text-color: #EEEEEE;
 
 
 @body-default-background: @light-background;
 @card-background: @light-background;
 
-@disabled-answer: #B2E8F7;
+@disabled-answer: lighten(@dark-background, 30%);
 
-@settings-header-background: #FFDF7D;
-@settings-header-color: @regular-text-color;
-@unlocked-color: #4DEC68;
-@pristine-color: #C6C0C0;
-@locked-color: #EC4D68;
+@settings-header-background: darken(@dark-background, 10%);
+@settings-header-color: @inverse-text-color;
+@unlocked-color: #7AC76B;
+@pristine-color: @disabled-answer;
+@locked-color: #FC3D3D;
+
+@footer-link-color: @inverse-text-color;
 
 @import "prefixer";
 @import "includes/bootstrap";
