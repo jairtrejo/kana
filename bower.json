@@ -17,13 +17,19 @@
   },
   "overrides": {
     "bootstrap": {
-      "main": [
-        "dist/fonts/**",
-        "dist/js/bootstrap.min.js"
-      ]
+      "main": []
     },
     "less-prefixer": {
       "main": []
+    },
+    "jquery": {
+        "main": ["dist/jquery.min.js", "dist/jquery.min.map"]
+    },
+    "lodash": {
+        "main": ["dist/lodash.underscore.min.js"]
+    },
+    "underscore": {
+        "main": []
     }
   }
 }
