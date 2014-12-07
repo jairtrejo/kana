@@ -5,6 +5,7 @@ var gulp           = require("gulp"),
     browserify     = require("browserify"),
     uglify         = require("gulp-uglify"),
     cssmin         = require("gulp-cssmin"),
+    imagemin       = require("gulp-imagemin"),
     sourcemaps     = require("gulp-sourcemaps"),
     mainBowerFiles = require("main-bower-files"),
     inject         = require("gulp-inject"),
@@ -28,6 +29,10 @@ var config = {
         css: {
             src: ["src/css/**/*.css"],
             dest: "build/css"
+        },
+        images: {
+            src: ["src/images/**/*.jpg", "src/images/**/*.jpeg", "src/images/**/*.png"],
+            dest: "build/images"
         },
         less: {
             src: ["src/less/**/*.less", "!src/less/includes/**"],
@@ -80,6 +85,15 @@ gulp.task("css", function(){
         .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task("images", function(){
+    return gulp.src(config.paths.images.src)
+        .pipe(imagemin({
+            progressive: true,
+            interlaced: true
+        }))
+        .pipe(gulp.dest(config.paths.images.dest));
+});
+
 gulp.task("bower", function(){
     return gulp.src(mainBowerFiles(), {base: "bower_components"})
         .pipe(gulp.dest(config.paths.bower.dest));
@@ -121,6 +135,7 @@ gulp.task("default", ["build", "browser-sync"], function(){
     gulp.watch(config.paths.html.src, ["html", browserSync.reload]);
     gulp.watch(config.paths.javascript.src, ["browserify", browserSync.reload]);
     gulp.watch(config.paths.bower.src, ["bower", browserSync.reload]);
+    gulp.watch(config.paths.images.src, ["images", browserSync.reload]);
 
     gulp.watch(config.paths.css.src, ["css"]);
     gulp.watch(config.paths.less.src, ["less"]);
