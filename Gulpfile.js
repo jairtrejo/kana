@@ -5,6 +5,7 @@ var gulp           = require("gulp"),
     browserify     = require("browserify"),
     uglify         = require("gulp-uglify"),
     cssmin         = require("gulp-cssmin"),
+    uncss          = require("gulp-uncss"),
     imagemin       = require("gulp-imagemin"),
     sourcemaps     = require("gulp-sourcemaps"),
     mainBowerFiles = require("main-bower-files"),
@@ -72,7 +73,7 @@ gulp.task("browserify", function(){
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest(config.paths.javascript.dest));
 });
 
@@ -80,7 +81,7 @@ gulp.task("css", function(){
     return gulp.src(config.paths.css.src)
         .pipe(sourcemaps.init())
         .pipe(cssmin())
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest(config.paths.css.dest))
         .pipe(browserSync.reload({stream: true}));
 });
@@ -100,6 +101,8 @@ gulp.task("bower", function(){
 });
 
 gulp.task("less", function(){
+    var responsiveFilter = filter("!responsive.css");
+
     return gulp.src(config.paths.less.src)
         .pipe(sourcemaps.init())
         .pipe(less({
@@ -108,8 +111,24 @@ gulp.task("less", function(){
                 "bower_components/less-prefixer"
             ]
         }))
+        .pipe(responsiveFilter)
+        .pipe(uncss({
+            html: [
+                'src/index.html',
+                'src/templates/app.html',
+                'src/templates/kana-row.html',
+                'src/templates/question.html',
+                'src/templates/settings.html',
+            ],
+            ignore: [
+                ".answer[disabled]", ".invisible",
+                /.is-visible.*/, /.wrong.*/, /.correct.*/, /.hidden.*/,
+                /.settings.*/
+            ],
+        }))
+        .pipe(responsiveFilter.restore())
         .pipe(concat("main.min.css"))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest(config.paths.css.dest))
         .pipe(filter("**/*.css"))
         .pipe(browserSync.reload({stream: true}));

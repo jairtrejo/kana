@@ -1,0 +1,53 @@
+@import "includes/theme";
+@import "includes/material";
+
+@media(min-width:992px){
+    .container{
+        width: 400px;
+        margin: 0 auto;
+    }
+
+    .game{
+        .card(2);
+    }
+
+    .question{
+        height: 250px;
+        padding-top: 100px;
+        margin-bottom: 100px;
+    }
+
+    .settings{
+        top: 60px;
+        width: 400px;
+        max-height: 500px;
+
+        .learning-status{
+            font-size: 28px;
+        }
+    }
+
+    body{
+        background-color: @dark-background;
+    }
+}
+
+@media(max-width:991px){
+    .answers{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin-left: -15px;
+    }
+    .question{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        height: 250px;
+        line-height: 250px;
+        width: 300px;
+        margin-left: -150px;
+        margin-top: -125px;
+    }
+}
+

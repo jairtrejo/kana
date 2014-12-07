@@ -1,29 +1,4 @@
-/*
- * Sakura strong - colourlovers 73612
- */
-
-@accent-color: #EC4D68;
-
-@dark-background: #7C7171;
-@light-background: #FEF9FD;
-
-@regular-text-color: #464040;
-@inverse-text-color: #EEEEEE;
-
-
-@body-default-background: @light-background;
-@card-background: @light-background;
-
-@disabled-answer: lighten(@dark-background, 30%);
-
-@settings-header-background: darken(@dark-background, 10%);
-@settings-header-color: @inverse-text-color;
-@unlocked-color: #7AC76B;
-@pristine-color: @disabled-answer;
-@locked-color: #FC3D3D;
-
-@footer-link-color: @inverse-text-color;
-
+@import "includes/theme";
 @import "prefixer";
 @import "includes/bootstrap";
 @import "includes/material";
@@ -98,15 +73,15 @@ nav .fa{
     }
 }
 
-.wrong{
-    .question{
-        .shake-target;
-    }
-}
-
 .is-visible{
     .question, .answer{
         .bounce-up-target;
+    }
+}
+
+.wrong{
+    .question{
+        .shake-target;
     }
 }
 
@@ -197,60 +172,5 @@ nav .fa{
         border-bottom: solid 1px #DDD;
         padding-bottom: 10px;
         margin-bottom: 10px;
-    }
-}
-
-
-/*
- * Media queries
- */
-
-@media(min-width:992px){
-    .container{
-        width: 400px;
-        margin: 0 auto;
-    }
-
-    .game{
-        .card(2);
-    }
-
-    .question{
-        height: 250px;
-        padding-top: 100px;
-        margin-bottom: 100px;
-    }
-
-    .settings{
-        top: 60px;
-        width: 400px;
-        max-height: 500px;
-
-        .learning-status{
-            font-size: 28px;
-        }
-    }
-
-    body{
-        background-color: @dark-background;
-    }
-}
-
-@media(max-width:991px){
-    .answers{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        margin-left: -15px;
-    }
-    .question{
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        height: 250px;
-        line-height: 250px;
-        width: 300px;
-        margin-left: -150px;
-        margin-top: -125px;
     }
 }
