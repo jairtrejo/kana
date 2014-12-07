@@ -43,6 +43,10 @@ var config = {
         bower: {
             src: "bower_components",
             dest: "build/lib"
+        },
+        verbatim: {
+            src: ["src/manifest.json", "src/favicon.png"],
+            dest: "build"
         }
     }
 };
@@ -135,6 +139,11 @@ gulp.task("less", function(){
         .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task("verbatim", function(){
+    gulp.src(config.paths.verbatim.src)
+        .pipe(gulp.dest(config.paths.verbatim.dest));
+});
+
 gulp.task("manifest", ["bower", "html", "browserify", "css", "images", "less"], function(){
     return gulp.src("build/**")
         .pipe(manifest({
@@ -150,12 +159,12 @@ gulp.task("manifest", ["bower", "html", "browserify", "css", "images", "less"], 
                 "lib/font-awesome/fonts/fontawesome-webfont.woff?v=4.2.0"
             ],
             filename: "app.manifest",
-            exclude: ["app.manifest"]
+            exclude: ["app.manifest", "manifest.json"]
         }))
         .pipe(gulp.dest("build"))
 });
 
-gulp.task("build", ["manifest"]);
+gulp.task("build", ["manifest", "verbatim"]);
 
 gulp.task("test", function(){
     karma.server.start({

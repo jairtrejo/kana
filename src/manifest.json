@@ -1,0 +1,14 @@
+{
+    "name": "Kana",
+    "icons": [
+        {
+            "src": "images/android-touch-icon-192x192.png",
+            "sizes": "92x92",
+            "type": "image/png",
+            "density": "4.0"
+        }
+    ],
+    "start_url": "index.html",
+    "display": "standalone",
+    "orientation": "landscape"
+}
