@@ -11,6 +11,7 @@ var gulp           = require("gulp"),
     mainBowerFiles = require("main-bower-files"),
     inject         = require("gulp-inject"),
     less           = require("gulp-less"),
+    manifest       = require("gulp-manifest"),
     filter         = require("gulp-filter"),
     rename         = require("gulp-rename"),
     browserSync    = require("browser-sync"),
@@ -134,15 +135,27 @@ gulp.task("less", function(){
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task("browser-sync", function(){
-    browserSync({
-        server: {
-            baseDir: "./build"
-        }
-    });
+gulp.task("manifest", ["bower", "html", "browserify", "css", "images", "less"], function(){
+    return gulp.src("build/**")
+        .pipe(manifest({
+            hash: true,
+            timestamp: false,
+            preferOnline: false,
+            network: ["*"],
+            cache: [
+                "lib/font-awesome/fonts/FontAwesome.otf?v=4.2.0",
+                "lib/font-awesome/fonts/fontawesome-webfont.eot?v=4.2.0",
+                "lib/font-awesome/fonts/fontawesome-webfont.svg?v=4.2.0",
+                "lib/font-awesome/fonts/fontawesome-webfont.ttf?v=4.2.0",
+                "lib/font-awesome/fonts/fontawesome-webfont.woff?v=4.2.0"
+            ],
+            filename: "app.manifest",
+            exclude: ["app.manifest"]
+        }))
+        .pipe(gulp.dest("build"))
 });
 
-gulp.task("build", ["bower", "html", "browserify", "css", "less"]);
+gulp.task("build", ["manifest"]);
 
 gulp.task("test", function(){
     karma.server.start({
@@ -150,7 +163,13 @@ gulp.task("test", function(){
     });
 });
 
-gulp.task("default", ["build", "browser-sync"], function(){
+gulp.task("default", ["build"], function(){
+    browserSync({
+        server: {
+            baseDir: "./build"
+        }
+    });
+
     gulp.watch(config.paths.html.src, ["html", browserSync.reload]);
     gulp.watch(config.paths.javascript.src, ["browserify", browserSync.reload]);
     gulp.watch(config.paths.bower.src, ["bower", browserSync.reload]);
