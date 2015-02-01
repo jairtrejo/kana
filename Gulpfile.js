@@ -179,11 +179,11 @@ gulp.task("default", ["build"], function(){
         }
     });
 
-    gulp.watch(config.paths.html.src, ["html", browserSync.reload]);
-    gulp.watch(config.paths.javascript.src, ["browserify", browserSync.reload]);
-    gulp.watch(config.paths.bower.src, ["bower", browserSync.reload]);
-    gulp.watch(config.paths.images.src, ["images", browserSync.reload]);
+    gulp.watch(config.paths.html.src, ["html", "manifest", browserSync.reload]);
+    gulp.watch(config.paths.javascript.src, ["browserify", "manifest", browserSync.reload]);
+    gulp.watch(config.paths.bower.src, ["bower", "manifest", browserSync.reload]);
+    gulp.watch(config.paths.images.src, ["images", "manifest", browserSync.reload]);
 
-    gulp.watch(config.paths.css.src, ["css"]);
-    gulp.watch(config.paths.less.src, ["less"]);
+    gulp.watch(config.paths.css.src, ["css", "manifest"]);
+    gulp.watch(config.paths.less.src, ["less", "manifest"]);
 });
