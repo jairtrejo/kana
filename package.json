@@ -29,7 +29,7 @@
     "karma": "^0.12.28",
     "karma-browserify": "^1.0.0",
     "karma-chrome-launcher": "^0.1.5",
-    "karma-coverage": "^0.2.6",
+    "karma-coverage": "0.2.6",
     "karma-jasmine": "^0.3.1",
     "karma-jasmine-jquery": "^0.1.1",
     "karma-phantomjs-launcher": "^0.1.4",
