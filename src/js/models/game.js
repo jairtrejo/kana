@@ -102,5 +102,13 @@ function getAvailable(rows){
 }
 
 function saveGame(game){
-    return localStorage && localStorage.setItem("game", JSON.stringify(game));
+    try {
+        return localStorage && localStorage.setItem("game", JSON.stringify(game));
+    }
+    catch (e) {
+        if(e.name !== 'QuotaExceededError'){
+            console.error(e);
+        }
+        return undefined;
+    }
 }
