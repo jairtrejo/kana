@@ -20,7 +20,7 @@ Game.prototype.getQuestion = function(){
 
     var questionKana = pickQuestion(available);
 
-    question = {
+    var question = {
         kana: questionKana,
         question: questionKana[questionField],
         answer: questionKana[answerField]
