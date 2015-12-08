@@ -15,7 +15,7 @@ module.exports = Backbone.View.extend({
 
     render: function(){
         this.$el.html(this.template());
-        if(window.navigator.standalone){
+        if(window.navigator.standalone || window.isCordovaiOSApp){
             this.$('nav').css('padding-top', '15px');
         }
     },
