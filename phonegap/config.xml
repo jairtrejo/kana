@@ -1,12 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.getkana.kana" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.getkana.app"
+        version="1.0.0"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
     <name>Kana</name>
     <description>
         Learning the syllabaries is the first step for successful japanese learning. Master the hiragana and katakana in no time with Kana!
     </description>
+
     <author email="jair@jairtrejo.mx" href="http://jairtrejo.mx">
         Jair Trejo
     </author>
+
     <content src="index.html" />
     <access origin="http://getkana.com" />
 
@@ -16,6 +22,7 @@
     <preference name="Orientation" value="portrait" />
     <preference name="prerendered-icon" value="false" />
     <preference name="DisallowOverscroll" value="true"/>
+    <preference name="BackupWebStorage" value="local"/>
 
     <!-- Icons & Splash screens -->
     <platform name="ios">
