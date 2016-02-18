@@ -1,7 +1,7 @@
 var gulp           = require("gulp"),
     minifyHTML     = require("gulp-minify-html"),
     concat         = require("gulp-concat"),
-    transform      = require('vinyl-transform'),
+    transform      = require("vinyl-transform"),
     browserify     = require("browserify"),
     uglify         = require("gulp-uglify"),
     cssmin         = require("gulp-cssmin"),
@@ -11,11 +11,12 @@ var gulp           = require("gulp"),
     mainBowerFiles = require("main-bower-files"),
     inject         = require("gulp-inject"),
     less           = require("gulp-less"),
-    manifest       = require("gulp-manifest"),
     filter         = require("gulp-filter"),
     rename         = require("gulp-rename"),
     browserSync    = require("browser-sync"),
     karma          = require("karma");
+    path           = require("path"),
+    swPrecache     = require("sw-precache");
 
 var config = {
     paths: {
@@ -144,27 +145,21 @@ gulp.task("verbatim", function(){
         .pipe(gulp.dest(config.paths.verbatim.dest));
 });
 
-gulp.task("manifest", ["bower", "html", "browserify", "css", "images", "less"], function(){
-    return gulp.src("build/**")
-        .pipe(manifest({
-            hash: true,
-            timestamp: false,
-            preferOnline: false,
-            network: ["*"],
-            cache: [
-                "lib/font-awesome/fonts/FontAwesome.otf?v=4.2.0",
-                "lib/font-awesome/fonts/fontawesome-webfont.eot?v=4.2.0",
-                "lib/font-awesome/fonts/fontawesome-webfont.svg?v=4.2.0",
-                "lib/font-awesome/fonts/fontawesome-webfont.ttf?v=4.2.0",
-                "lib/font-awesome/fonts/fontawesome-webfont.woff?v=4.2.0"
-            ],
-            filename: "app.manifest",
-            exclude: ["app.manifest", "manifest.json"]
-        }))
-        .pipe(gulp.dest("build"))
+gulp.task("generate-service-worker",
+          ["bower", "html", "browserify", "css", "images", "less"], function(callback) {
+  var rootDir = "build";
+
+  swPrecache.write(path.join(rootDir, "service-worker.js"), {
+    cacheId: 'com.getkana',
+    staticFileGlobs: [
+        rootDir + "/**/*.{js,html,css,png,jpg,gif,otf,eot,svg,ttf,woff}",
+    ],
+    ignoreUrlParametersMatching: [/v/],
+    stripPrefix: rootDir
+  }, callback);
 });
 
-gulp.task("build", ["manifest", "verbatim"]);
+gulp.task("build", ["generate-service-worker", "verbatim"]);
 
 gulp.task("test", function(){
     karma.server.start({
@@ -174,16 +169,15 @@ gulp.task("test", function(){
 
 gulp.task("default", ["build"], function(){
     browserSync({
-        server: {
-            baseDir: "./build"
-        }
+        server: "./build",
+        https: true
     });
 
-    gulp.watch(config.paths.html.src, ["html", "manifest", browserSync.reload]);
-    gulp.watch(config.paths.javascript.src, ["browserify", "manifest", browserSync.reload]);
-    gulp.watch(config.paths.bower.src, ["bower", "manifest", browserSync.reload]);
-    gulp.watch(config.paths.images.src, ["images", "manifest", browserSync.reload]);
+    gulp.watch(config.paths.html.src, ["html", "generate-service-worker", browserSync.reload]);
+    gulp.watch(config.paths.javascript.src, ["browserify", "generate-service-worker", browserSync.reload]);
+    gulp.watch(config.paths.bower.src, ["bower", "generate-service-worker", browserSync.reload]);
+    gulp.watch(config.paths.images.src, ["images", "generate-service-worker", browserSync.reload]);
 
-    gulp.watch(config.paths.css.src, ["css", "manifest"]);
-    gulp.watch(config.paths.less.src, ["less", "manifest"]);
+    gulp.watch(config.paths.css.src, ["css", "generate-service-worker"]);
+    gulp.watch(config.paths.less.src, ["less", "generate-service-worker"]);
 });
