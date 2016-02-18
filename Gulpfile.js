@@ -155,7 +155,8 @@ gulp.task("generate-service-worker",
         rootDir + "/**/*.{js,html,css,png,jpg,gif,otf,eot,svg,ttf,woff}",
     ],
     ignoreUrlParametersMatching: [/v/],
-    stripPrefix: rootDir
+    stripPrefix: rootDir,
+    replacePrefix: "app"
   }, callback);
 });
 
