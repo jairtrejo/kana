@@ -1,5 +1,5 @@
 {
-  "name": "Get Kana",
+  "name": "kana",
   "version": "1.0.0-alpha",
   "description": "A simple tool for learning the japanese syllabaries.",
   "main": "index.html",
