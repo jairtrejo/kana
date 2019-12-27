@@ -10,5 +10,6 @@
     ],
     "start_url": "index.html",
     "display": "standalone",
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "theme_color": "#ec4d68"
 }
